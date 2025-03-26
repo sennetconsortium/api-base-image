@@ -26,8 +26,12 @@ RUN yum update -y && \
     yum clean all
 
 # Install python packages
-RUN python3 -m ensurepip --upgrade && \
-    pip install wheel uwsgi
+RUN python3.11 -m ensurepip --upgrade
+
+RUN echo 'alias python3=python3.11' >> /root/.bashrc &&\
+    echo 'alias pip=pip3.11' >> /root/.bashrc
+
+RUN pip install wheel uwsgi
 
 # Install su-exec for de-elevating root to deepphe user
 # N.B. git and gcc are also needed for su-exec installation, but since already

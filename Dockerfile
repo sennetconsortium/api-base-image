@@ -12,6 +12,11 @@ enabled=0\n\\n\
 disable_system_repos=0\n'\
 >> /etc/yum/pluginconf.d/subscription-manager.conf
 
+# Specify the Python version to be installed. Default is 3.11.
+# Override with --build-arg PYTHON_VERSION=3.12 or args: PYTHON_VERSION=3.12 in docker-compose
+# Note: RHEL only has certain versions of Python available. If the version is not available, the build will fail.
+ARG PYTHON_VERSION=3.11
+
 # Reduce the number of layers in image by minimizing the number of separate RUN commands
 # 1 - Install GCC, Git, Python 3.11, libraries needed for Python development, and pcre needed by uwsgi
 # 2 - Set default Python version for `python` command, `python3` already points to the newly installed Python3.9
@@ -22,16 +27,13 @@ disable_system_repos=0\n'\
 # Install dependencies
 RUN yum update -y && \
     yum install -y yum-utils && \
-    yum install -y gcc git python3.11 python3-devel && \
+    yum install -y gcc git python${PYTHON_VERSION} python${PYTHON_VERSION}-devel && \
     yum clean all
 
 # Install python packages
-RUN python3.11 -m ensurepip --upgrade
-
-RUN echo 'alias python3=python3.11' >> /root/.bashrc &&\
-    echo 'alias pip=pip3.11' >> /root/.bashrc
-
-RUN pip install wheel uwsgi
+RUN python${PYTHON_VERSION} -m ensurepip --upgrade && \
+    python${PYTHON_VERSION} -m pip install --upgrade pip && \
+    python${PYTHON_VERSION} -m pip install wheel uwsgi
 
 # Install su-exec for de-elevating root to deepphe user
 # N.B. git and gcc are also needed for su-exec installation, but since already

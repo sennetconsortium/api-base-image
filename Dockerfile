@@ -1,5 +1,5 @@
 # Parent image
-FROM redhat/ubi9:9.4
+FROM redhat/ubi9:9.5
 
 LABEL description="SenNet API Docker Base Image"
 

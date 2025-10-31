@@ -1,5 +1,5 @@
 # Parent image
-FROM python:3.11-slim-bookworm
+FROM python:3.13-slim-bookworm
 
 LABEL description="SenNet API Docker Base Image"
 

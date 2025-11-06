@@ -1,6 +1,6 @@
 # api-base-image
 
-The docker image to be used as the base/parent image for the various SenNet APIs. The current version is based on the official Python 3.11 Slim Bookworm image.
+The docker image to be used as the base/parent image for the various SenNet APIs. The current version is based on the official Python 3.13 Slim Bookworm image.
 
 ## Building
 To build the image:

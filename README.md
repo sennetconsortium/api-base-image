@@ -8,7 +8,7 @@ To build the image:
 
 ```sh
 # Using the build script in the root of the repository. Replace {VERSION} with the current version.
-./build.sh api-base-image {VERSION}
+./build.sh {VERSION}
 
 # Using docker directly.Replace {VERSION} with the current version
 docker build --platform=linux/amd64 --provenance=true --sbom=true --tag sennet/api-base-image:{VERSION} .

@@ -11,8 +11,10 @@ RUN apt-get update -y && \
     apt-get dist-upgrade -y && \
     apt-get install -y curl gcc
 
+# Install uWSGI using pip
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install uwsgi
+    pip install uwsgi && \
+    rm -rf /root/.cache/pip
 
 # Remove build dependencies
 RUN apt-get purge -y gcc && \

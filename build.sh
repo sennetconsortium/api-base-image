@@ -9,4 +9,4 @@ if [ -z "$VERSION" ]; then
   exit 1
 fi
 
-docker build --platform=linux/amd64 --provenance=true --sbom=true --tag sennet/api-base-image:${VERSION} .
+docker build --no-cache --platform=linux/amd64 --provenance=true --sbom=true --tag sennet/api-base-image:${VERSION} .
